@@ -5,6 +5,7 @@ import names
 from collections import defaultdict
 import brains
 
+
 class Default(object):
     """
     Default Creature class, inherits form Creature_Brain
@@ -25,15 +26,14 @@ class Default(object):
 
     def die(self):
         print("%s has died at tile %d/%d"
-            % (self.name, self.position, len(self.board.tiles)))
-        
+              % (self.name, self.position, len(self.board.tiles)))
 
     def alive(self):
-        return bool(max(0, self.health)) # If health is <= 0 then False
+        return bool(max(0, self.health))  # If health is <= 0 then False
 
     def network(self, x):
         # y = np.random.choice([True, False]) # Placeholder for NN (coin flip)
-
+        y = x
         return y
 
     def reset(self):

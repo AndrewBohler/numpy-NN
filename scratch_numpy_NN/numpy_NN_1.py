@@ -13,9 +13,10 @@ import creatures
 def clear_screen():
     pass
 
+
 class Board(object):
     def __init__(self, n_tiles=100, tiles=None, features=2,
-        tile_impact=5):
+                 tile_impact=5):
         """
         :param size: number of tiles
         :param tile_impact: int or float, highest absolute value of attribute
@@ -29,7 +30,7 @@ class Board(object):
 
     def randomize(self):
         self.tiles = (np.random.random_sample((self.n_tiles, self.features))
-            * self.impact)
+                      * self.impact)
 
 
 def main():
@@ -45,20 +46,17 @@ def main():
     ####################
 
     board = Board(n_tiles)
-    test_guy = Creature(name, default_health=d_health)
+    test_guy = creatures.Default(name, default_health=d_health)
     board.randomize()
     for run in range(n_runs):
         test_guy.reset(run)
-        
         test_guy.board = board
         test_guy.run()
 
 
-
 if __name__ == '__main__':
-    bob = Creature('bobby', iNeurons=2, oNeurons=2)
+    bob = creatures.Default('bobby', iNeurons=2, oNeurons=2)
 
     bob.print_network()
-    
 
     input('game completed, press <enter> to exit')
