@@ -15,9 +15,9 @@ def dSigmoid(x):
 
 
 class Default(object):
-    #goals = {'Live': }
+    #  goals = {'Live': }
     def __init__(self, iNeurons=1, hNeurons=3, oNeurons=1, n_layers=3,
-        back_prop_rate=10, learning_rate=0.01):
+                 back_prop_rate=10, learning_rate=0.01):
         """
         :param iNeurons: x number of input neurons where x > 0
         :param hNeurons: x number of hidden neurons where x > 0
@@ -53,8 +53,8 @@ class Default(object):
         # everything starts at 0 so...
         # z[0] = a[0]*w[0] + b[0] and a[1] = sigmoid(z[0])
         self.a = [None] * self.n_layers
-        self.w = [None] * (self.n_layers-1) # self.n_layers-1 because the
-        self.b = [1.0] * (self.n_layers-1) # output has no w, b, z, or dJdW
+        self.w = [None] * (self.n_layers-1)  # self.n_layers-1 because the
+        self.b = [1.0] * (self.n_layers-1)  # output has no w, b, z, or dJdW
         self.z = [None] * (self.n_layers-1)
         self.dJdW = [None] * (self.n_layers-1)
         # shape activation layers
@@ -102,50 +102,48 @@ class Default(object):
     def cost(self, y, y_hat):
         return -(y-y_hat)
 
-
     def loss(self):
         pass
 
-
     def back_prop(self):
         """ Uses gradient decent to update weights """
-        self.dJdW[-1] = np.multiply(-(self.a[0]-self.a[-1]), dSigmoid(self.z[-1]))
+        self.dJdW[-1] = np.multiply(-(self.a[0]-self.a[-1]),
+                                    dSigmoid(self.z[-1]))
 
     def print_network(self):
         print('\niNeurons:', self.iNeurons,
-        '\nhNeurons:', self.hNeurons,
-        '\noNeurons:', self.oNeurons,
-        '\nn_layers:', self.n_layers)
+              '\nhNeurons:', self.hNeurons,
+              '\noNeurons:', self.oNeurons,
+              '\nn_layers:', self.n_layers)
         print('\n   Network')
         for i in range(self.n_layers):
             try:
                 print('_____________\n\n',
-                    'activation[{}]:\n{}'.format(i, self.a[i]))
+                      'activation[{}]:\n{}'.format(i, self.a[i]))
                 print('_____________\n\n',
-                    'weights[{}]:\n{}'.format(i, self.w[i]))
+                      'weights[{}]:\n{}'.format(i, self.w[i]))
                 print('_____________\n\n',
-                    'bias[{}]: {}'.format(i, self.b[i]))
+                      'bias[{}]: {}'.format(i, self.b[i]))
                 print('_____________\n\n',
-                    'activity[{}]:\n{}'.format(i, self.z[i]))
+                      'activity[{}]:\n{}'.format(i, self.z[i]))
             except IndexError:
                 print('_____________\n')
-    
+
     def run(self, verbose=0):
         for i in range(self.back_prop_rate):
             self.feed_forward([13, 23, 16, 30])
             # if verbose >= 2:
             #     print(' input   output')
             #     print(self.ioHistory)
-            #     for n, x, y in self.iNeurons, self.ioHistory[-1][0], self.ioHistory[-1][1]:
+            #     for n, x, y in self.iNeurons, self.ioHistory[-1][0],
+            #         self.ioHistory[-1][1]:
             #         print(' %4d  | %4d' % (x[0][n], y[0][n]))
             if verbose >= 1:
                 print('Loss = {}'.format(self.loss))
         self.back_prop()
-        
 
 
-
-if __name__ =='__main__':
+if __name__ == '__main__':
     brain = Default(iNeurons=4, oNeurons=4)
     brain.print_network
     while True:
@@ -157,11 +155,5 @@ if __name__ =='__main__':
             continue
         else:
             break
-1
-234
-5
-54
-6
-
 
     input('End of code')
